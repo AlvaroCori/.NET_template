@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "T0mTEqBepmNF4JTeZ5HY7Agtm69JcOxK6JlOpGKryII=",
+  "Source": "template_dotnet",
+  "BasePath": "_content/template_dotnet",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
