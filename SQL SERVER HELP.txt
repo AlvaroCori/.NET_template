@@ -117,6 +117,28 @@ BEGIN
     RETURN @Resultado;
 END;
 
+-- USUARIO, LOGIN Y ROLES
+
+USE namedb;
+CREATE LOGIN monitor_usuario WITH PASSWORD = 'asereje';
+CREATE USER m_usuario FOR LOGIN monitor_usuario;
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON dbo.ubicacion TO m_usuario;
+GRANT SELECT ON dbo.departamento TO m_usuario;
+
+REVOKE SELECT ON dbo.Empleados TO mi_usuario;
+-- O para eliminar todos los permisos
+REVOKE ALL ON dbo.Empleados TO mi_usuario;
+
+CREATE ROLE rol_crud_empleados;
+GRANT SELECT, INSERT, UPDATE, DELETE ON dbo.Empleados TO rol_crud_empleados;
+
+-- crear login
+-- crear usuario
+-- asignar login a usuario
+
+ALTER ROLE rol_crud_empleados ADD MEMBER usuario_editor;
+
 -- TRANSACTION
 
 BEGIN TRANSACTION;
@@ -128,3 +150,77 @@ BEGIN CATCH
     ROLLBACK TRANSACTION;
     -- Manejo de errores
 END CATCH
+
+-- TRIGGERS 
+
+-- DML
+CREATE TRIGGER tr_AuditoriaEmpleados
+ON Empleados
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    INSERT INTO AuditoriaEmpleados(
+        EmpleadoID, 
+        Accion, 
+        Fecha, 
+        Usuario
+    )
+    SELECT 
+        i.EmpleadoID,
+        'INSERT',
+        GETDATE(),
+        SYSTEM_USER
+    FROM inserted i;
+    
+    PRINT 'Se ha registrado un nuevo empleado en la auditoría';
+END;
+
+-- DDL
+CREATE TRIGGER tr_AuditarDDL
+ON DATABASE
+FOR CREATE_TABLE, ALTER_TABLE, DROP_TABLE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    DECLARE @EventData XML = EVENTDATA();
+    
+    INSERT INTO AuditoriaDDL(
+        Evento, 
+        Objeto, 
+        Comando, 
+        Usuario, 
+        Fecha
+    )
+    VALUES(
+        @EventData.value('(/EVENT_INSTANCE/EventType)[1]', 'nvarchar(100)'),
+        @EventData.value('(/EVENT_INSTANCE/ObjectName)[1]', 'nvarchar(255)'),
+        @EventData.value('(/EVENT_INSTANCE/TSQLCommand/CommandText)[1]', 'nvarchar(max)'),
+        SYSTEM_USER,
+        GETDATE()
+    );
+END;
+
+-- LOGON
+
+CREATE TRIGGER tr_RegistrarLogon
+ON ALL SERVER
+FOR LOGON
+AS
+BEGIN
+    INSERT INTO BaseAuditoria.dbo.Logins(
+        LoginName,
+        FechaHora,
+        TipoAccion
+    )
+    VALUES(
+        ORIGINAL_LOGIN(),
+        GETDATE(),
+        'LOGON'
+    );
+END;
+
+
+
