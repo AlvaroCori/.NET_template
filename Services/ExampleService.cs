@@ -15,7 +15,7 @@ namespace template_dotnet.Services
             var example = await getExample(id);
             if (example != null)
             {
-                await repository.Delete(example);
+                await repository.DeleteAsync(example);
             }
         }
 
@@ -37,7 +37,7 @@ namespace template_dotnet.Services
 
         public async Task<ExampleModel> updateExample(ExampleModel exampleModel)
         {
-           return await repository.Update(exampleModel);
+           return await repository.UpdateAsync(exampleModel);
         }
     }
 }

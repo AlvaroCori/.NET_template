@@ -1,0 +1,130 @@
+-- CREAR TABLA
+
+-- Primero creamos la tabla principal (a la que apuntará la clave foránea)
+CREATE TABLE Departamentos (
+    DepartamentoID INT IDENTITY(1,1) PRIMARY KEY,
+    NombreDepartamento NVARCHAR(100) NOT NULL,
+    Presupuesto DECIMAL(18,2) NOT NULL
+);
+
+-- Ahora creamos la tabla con todos los elementos solicitados
+CREATE TABLE Empleados (
+    -- Clave primaria autoincremental
+    EmpleadoID INT IDENTITY(1,1) PRIMARY KEY,
+    
+    -- Datos básicos
+    Nombre NVARCHAR(100) NOT NULL,
+    Apellido NVARCHAR(100) NOT NULL,
+    
+    -- Clave foránea que referencia a Departamentos
+    DepartamentoID INT NOT NULL,
+    CONSTRAINT FK_Empleados_Departamentos 
+        FOREIGN KEY (DepartamentoID) REFERENCES Departamentos(DepartamentoID),
+    
+    -- Campo de fecha (solo fecha)
+    FechaContratacion DATE NOT NULL,
+    
+    -- Campo de fecha y hora
+    FechaHoraRegistro DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    
+    -- Otros campos de ejemplo
+    Salario DECIMAL(18,2) NULL,
+    Activo BIT NOT NULL DEFAULT 1
+);
+
+-- MODIFICAR TABLA
+
+ALTER TABLE Empleados
+ADD Email NVARCHAR(100) NULL; -- NULL permite valores nulos
+
+ALTER TABLE Empleados
+DROP COLUMN Activo; -- Elimina la columna Activo
+
+ALTER TABLE Empleados
+ALTER COLUMN Salario DECIMAL(19,2) NOT NULL; -- Cambia tipo y hace NOT NULL
+
+-- Agregar CHECK constraint
+ALTER TABLE Empleados
+ADD CONSTRAINT CHK_Salario CHECK (Salario >= 0);
+
+-- Agregar DEFAULT constraint
+ALTER TABLE Empleados
+ADD CONSTRAINT DF_FechaHoraRegistro 
+DEFAULT SYSDATETIME() FOR FechaHoraRegistro;
+
+-- Elimina la FK
+
+ALTER TABLE Empleados
+DROP CONSTRAINT FK_Empleados_Departamentos; 
+
+-- Modificar clave foranea
+
+-- Eliminar la existente
+ALTER TABLE Empleados
+DROP CONSTRAINT FK_Empleados_Departamentos;
+
+-- Crear nueva con ON DELETE CASCADE
+ALTER TABLE Empleados
+ADD CONSTRAINT FK_Empleados_Departamentos
+FOREIGN KEY (DepartamentoID) REFERENCES Departamentos(DepartamentoID)
+ON DELETE CASCADE;
+
+-- Renombrar
+
+EXEC sp_rename 'Empleados.FechaHoraRegistro', 'FechaRegistro', 'COLUMN';
+
+-- INDICE
+
+CREATE INDEX IX_Empleados_DepartamentoID ON Empleados(DepartamentoID);
+
+-- CHECK
+
+CONSTRAINT CHK_FechaContratacion CHECK (FechaContratacion <= CAST(GETDATE() AS DATE))
+
+-- STORED PROCEDURE
+
+CREATE PROCEDURE GetEmployeeByID(@EmployeeID INT)
+
+AS
+
+BEGIN
+
+   SELECT * FROM employees WHERE employee_id = @EmployeeID;
+
+END;
+
+-- STORED PROCEDURE COMPLEX
+
+CREATE FUNCTION dbo.CalcularDescuento
+(
+    @Precio DECIMAL(10,2),
+    @PorcentajeDescuento DECIMAL(5,2)
+)
+RETURNS DECIMAL(10,2)
+AS
+BEGIN
+    DECLARE @Resultado DECIMAL(10,2);
+    DECLARE @Mensaje VARCHAR(100);
+    
+    -- Cálculo del descuento
+    SET @Resultado = @Precio * (1 - @PorcentajeDescuento/100);
+    
+    -- Mensaje de depuración (visible solo durante la creación/ejecución)
+    SET @Mensaje = 'Precio original: ' + CAST(@Precio AS VARCHAR) + 
+                   ', Descuento aplicado: ' + CAST(@PorcentajeDescuento AS VARCHAR) + '%';
+    PRINT @Mensaje;
+    
+    RETURN @Resultado;
+END;
+
+-- TRANSACTION
+
+BEGIN TRANSACTION;
+BEGIN TRY
+    -- Operaciones SQL aquí
+    COMMIT TRANSACTION;
+END TRY
+BEGIN CATCH
+    ROLLBACK TRANSACTION;
+    -- Manejo de errores
+END CATCH

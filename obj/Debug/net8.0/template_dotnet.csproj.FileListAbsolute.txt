@@ -88,3 +88,4 @@ D:\rt\template_dotnet\template_dotnet\template_dotnet\bin\Debug\net8.0\runtimes\
 D:\rt\template_dotnet\template_dotnet\template_dotnet\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\rt\template_dotnet\template_dotnet\template_dotnet\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 D:\rt\template_dotnet\template_dotnet\template_dotnet\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+D:\rt\template_dotnet\template_dotnet\template_dotnet\obj\Debug\net8.0\template_dotnet.sourcelink.json

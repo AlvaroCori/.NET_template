@@ -1,5 +1,259 @@
 [
   {
+    "ContainingType": "template_dotnet.Controllers.SSExampleController",
+    "Method": "Get",
+    "RelativePath": "api/SSExample",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[template_dotnet.Models.SSExampleModel, template_dotnet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "template_dotnet.Controllers.SSExampleController",
+    "Method": "Post",
+    "RelativePath": "api/SSExample",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "example",
+        "Type": "template_dotnet.Models.SSExampleModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "template_dotnet.Models.SSExampleModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "template_dotnet.Controllers.SSExampleController",
+    "Method": "GetOne",
+    "RelativePath": "api/SSExample/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "template_dotnet.Models.SSExampleModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "template_dotnet.Controllers.SSExampleController",
+    "Method": "Update",
+    "RelativePath": "api/SSExample/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "example",
+        "Type": "template_dotnet.Models.SSExampleModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "template_dotnet.Models.SSExampleModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "template_dotnet.Controllers.SSExampleController",
+    "Method": "Delete",
+    "RelativePath": "api/SSExample/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "template_dotnet.Controllers.SSRExampleController",
+    "Method": "Get",
+    "RelativePath": "api/SSRExample",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "template_dotnet.Models.Responses.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[template_dotnet.Models.SSRExampleModel, template_dotnet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "template_dotnet.Controllers.SSRExampleController",
+    "Method": "Post",
+    "RelativePath": "api/SSRExample",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "example",
+        "Type": "template_dotnet.DTO.SSRExampleDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "template_dotnet.Models.Responses.ApiResponse\u00601[[template_dotnet.Models.SSRExampleModel, template_dotnet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 201
+      }
+    ]
+  },
+  {
+    "ContainingType": "template_dotnet.Controllers.SSRExampleController",
+    "Method": "GetOne",
+    "RelativePath": "api/SSRExample/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "template_dotnet.Models.Responses.ApiResponse\u00601[[template_dotnet.Models.SSRExampleModel, template_dotnet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "template_dotnet.Controllers.SSRExampleController",
+    "Method": "Update",
+    "RelativePath": "api/SSRExample/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "example",
+        "Type": "template_dotnet.DTO.SSRExampleDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "template_dotnet.Models.Responses.ApiResponse\u00601[[template_dotnet.Models.SSRExampleModel, template_dotnet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "template_dotnet.Controllers.SSRExampleController",
+    "Method": "Delete",
+    "RelativePath": "api/SSRExample/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "template_dotnet.Models.Responses.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 204
+      }
+    ]
+  },
+  {
     "ContainingType": "template_dotnet.Controllers.ExampleController",
     "Method": "Get",
     "RelativePath": "Example",
